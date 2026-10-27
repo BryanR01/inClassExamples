@@ -23,6 +23,7 @@ public class LinkedList {
 				curNode = curNode.next;
 			}
 			curNode.next = newNode;
+			curNode.next.prev=curNode;
 		}
 	}
 	
@@ -36,6 +37,7 @@ public class LinkedList {
 			this.head=newNode;
 			this.tail=newNode;
 		}else {
+			newNode.prev=this.tail;
 			this.tail.next = newNode;
 			this.tail = newNode;
 		}	
@@ -73,12 +75,9 @@ public class LinkedList {
 				if(curNode.value == value) {
 					result = curNode;
 					prevNode.next = curNode.next;
-					if(prevNode.next!=null) {
-						this.tail = prevNode.next;
-					}else {
+					if(curNode==this.tail) {
 						this.tail = prevNode;
 					}
-					break;
 				}
 				prevNode=curNode;
 				curNode=curNode.next;
@@ -96,7 +95,7 @@ public class LinkedList {
 		while(curNode!=null) {
 			System.out.printf("---------------\n");
 			System.out.printf("%s\n", curNode.toString());
-			System.out.printf("Value: %d  Next: %h\n", curNode.value,curNode.next);
+			System.out.printf("Value: %d  Prev: %h Next: %h\n", curNode.value,curNode.prev, curNode.next);
 			curNode = curNode.next;
 		}
 	}
